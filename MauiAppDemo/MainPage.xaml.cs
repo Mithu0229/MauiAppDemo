@@ -1,8 +1,10 @@
-﻿namespace MauiAppDemo
+﻿
+namespace MauiAppDemo
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
+        public const double FontSize = 22;
 
         public MainPage()
         {
@@ -19,6 +21,14 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+    }
+
+    public class GlobalFontSizeExtension : IMarkupExtension
+    {
+        public object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return MainPage.FontSize;
         }
     }
 
