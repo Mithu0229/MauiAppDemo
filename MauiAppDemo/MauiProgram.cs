@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiAppDemo.Services;
+using MauiAppDemo.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace MauiAppDemo
 {
@@ -19,6 +21,9 @@ namespace MauiAppDemo
     		builder.Logging.AddDebug();
 #endif
 
+            builder.Services.AddSingleton<CarService>();
+            builder.Services.AddSingleton<CarListViewModel>();
+            builder.Services.AddSingleton<MainPage>();
             return builder.Build();
         }
     }
