@@ -1,4 +1,5 @@
 ﻿using MauiAppDemo.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,34 @@ namespace MauiAppDemo.Services
 {
     public class CarService
     {
+        private SQLiteConnection conn;
+        string _dbPath;
+        string statusMessage;
+        public CarService(string dbPath)
+        {
+                _dbPath = dbPath;
+        }
+
+        private void Init()
+        {
+            if (conn != null) return;
+            conn = new SQLiteConnection(_dbPath);
+            conn.CreateTable<Car>();
+        }
         public List<Car> GetCars()
         {
-            return new List<Car>
-            { new Car { Id = 1, Make = "123", Model = "dm01", Vin = "13" }, new Car { Id = 1, Make = "123", Model = "dm01", Vin = "13" }
+            try
+            {
+                Init();
+                return conn.Table<Car>().ToList();  
 
-            };
+            }
+            catch (Exception ex)
+            {
+
+                statusMessage = "Failed to " + ex;
+            }
+            return new List<Car>();
         }
     }
 }

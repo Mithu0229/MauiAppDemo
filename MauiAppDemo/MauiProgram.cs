@@ -22,6 +22,9 @@ namespace MauiAppDemo
     		builder.Logging.AddDebug();
 #endif
 
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "cars.db3");
+            builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<CarService>(s, dbPath));
+
             builder.Services.AddSingleton<CarService>();
 
             builder.Services.AddSingleton<CarListViewModel>();
