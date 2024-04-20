@@ -8,7 +8,7 @@ namespace MauiAppDemo
        
         public MainPage(CarListViewModel carListView)
         {
-            Title = "Car list1";
+            Title = "Car list";
             InitializeComponent();
             BindingContext = carListView;
         }
